@@ -1,0 +1,91 @@
+### IntelliJ & JetBrains IDEs ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm, and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific settings
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/workspace.xml
+.idea/**/aws.xml
+
+# Generated & frequently changing files
+.idea/**/contentModel.xml
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/dataSources.xml
+.idea/**/dataSources/
+.idea/**/dbnavigator.xml
+.idea/**/dynamic.xml
+.idea/**/sqlDataSources.xml
+.idea/**/uiDesigner.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Build-related files
+cmake-build-*/
+.idea_modules/
+
+# Plugins-related files
+.idea/**/mongoSettings.xml
+.idea/**/sonarlint/
+.idea/**/sonarIssues.xml
+.idea/**/azureSettings.xml
+.idea/**/codestream.xml
+.idea/**/markdown-navigator-enh.xml
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator/
+.idea/**/httpRequests
+.idea/caches/build_file_checksums.ser
+
+# IntelliJ project files
+*.iml
+*.ipr
+.idea/misc.xml
+modules.xml
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Android & Crashlytics plugin files
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+crashlytics.properties
+fabric.properties
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# IntelliJ Patch
+.idea/$CACHE_FILE$
+
+### macOS System Files ###
+# Reference: https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
+
+# General macOS system files
+.AppleDouble
+.DS_Store
+.idea
+.LSOverride
+
+# Cache and metadata files
+Icon  # Must end with two \r
+._*
+.com.apple.timemachine.donotpresent
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Remote AFP share directories
+.apdisk
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+
+# SSL-related directories
+.well-known
