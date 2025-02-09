@@ -1,5 +1,5 @@
-# Use Nginx 1.24 Alpine base image
-FROM nginx:1.24-alpine
+# Use Nginx 1.22 Alpine base image
+FROM nginx:1.22-alpine
 
 # Maintainer information
 LABEL maintainer="Focela Technologies <opensource@focela.com>"
