@@ -1,0 +1,46 @@
+services:
+  nginx:
+    container_name: nginx
+    image: focela/nginx:1.24
+    restart: always
+    networks:
+      - focela-network
+    depends_on:
+      - php-fpm
+    ports:
+      - ${NGINX_PORT:-80}:80
+      - ${NGINX_HTTPS_PORT:-443}:443
+    volumes: &shared-volumes
+      - ./docker/nginx/sites-enabled:/etc/nginx/conf.d
+      - ./src:/var/www:cached
+      - ~/.composer:/var/www/.composer:cached
+      - ~/.ssh/id_rsa:/var/www/.ssh/id_rsa:cached
+      - ~/.ssh/known_hosts:/var/www/.ssh/known_hosts:cached
+      - appdata:/var/www
+      - sockdata:/sock
+      - ssldata:/etc/nginx/certs
+    extra_hosts: &extra-hosts
+      - "*:172.17.0.1"
+
+  php-fpm:
+    container_name: php-fpm
+    image: focela/php:8.4
+    restart: always
+    networks:
+      - focela-network
+    volumes: *shared-volumes
+    extra_hosts: *extra-hosts
+    environment:
+      BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+      BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
+      COMPOSER_DISABLE_XDEBUG_WARN: ${COMPOSER_DISABLE_XDEBUG_WARN:-1}
+      PHP_CS_FIXER_IGNORE_ENV: ${PHP_CS_FIXER_IGNORE_ENV:-1}
+      PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: ${PUPPETEER_SKIP_CHROMIUM_DOWNLOAD:-true}
+
+volumes:
+  appdata:
+  sockdata:
+  ssldata:
+
+networks:
+  focela-network:
