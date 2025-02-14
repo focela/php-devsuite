@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Check if `bin/cli` exists
+if [ ! -f "bin/cli" ]; then
+  echo "Error: 'bin/cli' not found."
+  echo "Please ensure the file exists in the 'bin/' directory."
+  exit 1
+fi
+
+# Check if `bin/cli` is executable
+if [ ! -x "bin/cli" ]; then
+  echo "Warning: 'bin/cli' is not executable."
+  echo "Attempting to grant execute permissions..."
+
+  # Try to fix permissions
+  chmod +x bin/cli 2>/dev/null
+
+  # Re-check if the permission fix was successful
+  if [ ! -x "bin/cli" ]; then
+    echo "Error: Failed to grant execute permissions."
+    echo "Please manually run the following command:"
+    echo "  chmod +x bin/cli"
+    exit 1
+  fi
+  echo "Permissions fixed. Proceeding..."
+fi
+
+# Execute the CLI Bash command
+echo "Starting CLI Bash session..."
+bin/cli bash

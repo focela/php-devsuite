@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Check if `docker compose` is available; otherwise, fallback to `docker-compose`.
+# This ensures compatibility with different Docker versions.
+if docker compose version > /dev/null 2>&1; then
+  DOCKER_COMPOSE="docker compose"
+else
+  DOCKER_COMPOSE="docker-compose"
+fi
+
+# Define the compose file(s) to use.
+# This script supports multiple compose files if needed in the future.
+COMPOSE_FILES=("compose.yaml")
+
+# Prefix each compose file with `-f` to ensure correct command syntax.
+# Using an array prevents issues with file paths that contain spaces.
+COMPOSE_ARGS=()
+for file in "${COMPOSE_FILES[@]}"; do
+  COMPOSE_ARGS+=("-f" "$file")
+done
+
+# Execute the Docker Compose command with the specified files and additional arguments.
+${DOCKER_COMPOSE} "${COMPOSE_ARGS[@]}" "$@"

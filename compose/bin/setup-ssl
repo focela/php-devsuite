@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Ensure a domain is provided as an argument
+if [ -z "$1" ]; then
+  echo "Error: Please specify a domain (e.g., mydomain.test)"
+  exit 1
+fi
+
+# Check if the Certificate Authority (CA) is already set up, if not, set it up
+if ! bin/docker-compose exec -T -u root nginx cat /root/.local/share/mkcert/rootCA.pem | grep -q 'BEGIN CERTIFICATE'; then
+  echo "Setting up Certificate Authority (CA)..."
+  bin/setup-ssl-ca
+fi
+
+# Initialize an empty array to store domain names without port numbers
+DOMAINS_CLEAN=()
+
+# Process each provided domain, stripping out any port numbers
+for DOMAIN in "$@"; do
+  CLEAN_DOMAIN=$(echo "$DOMAIN" | cut -d ':' -f1)
+  DOMAINS_CLEAN+=("$CLEAN_DOMAIN")
+done
+
+# Generate SSL certificate for the provided domains
+echo "Generating SSL certificates for: ${DOMAINS_CLEAN[*]}..."
+bin/docker-compose exec -T -u root nginx mkcert -key-file nginx.key -cert-file nginx.crt "${DOMAINS_CLEAN[@]}"
+
+# Move generated certificates to the appropriate location
+echo "Moving SSL certificate and key to /etc/nginx/certs/..."
+bin/docker-compose exec -T -u root nginx chown app:app nginx.key nginx.crt
+bin/docker-compose exec -T -u root nginx mv nginx.key nginx.crt /etc/nginx/certs/
+
+# Restart nginx to apply SSL changes
+echo "Restarting Nginx and related services to apply SSL changes..."
+bin/restart
+
+echo "SSL setup completed successfully."

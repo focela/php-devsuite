@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Ensure a CLI command is provided as an argument
+if [ -z "$1" ]; then
+  echo "Error: No CLI command specified."
+  echo "Usage: bin/clinotty <command>"
+  echo "Example: bin/clinotty ls"
+  exit 1
+fi
+
+# Execute the command inside the php-fpm container
+echo "Executing command inside php-fpm container: $@"
+bin/docker-compose exec php-fpm "$@"

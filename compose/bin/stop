@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Ensure that Docker and Docker Compose are available before stopping services
+if ! command -v docker &> /dev/null; then
+  echo "Error: Docker is not installed or not in the system's PATH."
+  echo "Please install Docker and try again."
+  exit 1
+fi
+
+if ! command -v bin/docker-compose &> /dev/null; then
+  echo "Error: 'docker-compose' not found in 'bin/'."
+  echo "Please ensure Docker Compose is installed and available."
+  exit 1
+fi
+
+# Stop the Docker containers
+echo "Stopping Docker services..."
+bin/docker-compose stop "$@"
+
+# Check if the containers stopped successfully
+if [ $? -eq 0 ]; then
+  echo "Services stopped successfully."
+else
+  echo "Error: Failed to stop services. Check logs for details."
+  exit 1
+fi

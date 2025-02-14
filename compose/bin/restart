@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Ensure that `bin/start` and `bin/stop` exist and are executable
+if [ ! -x "bin/stop" ] || [ ! -x "bin/start" ]; then
+  echo "Error: Required scripts 'bin/stop' or 'bin/start' are missing or not executable."
+  echo "Please ensure they exist and have execute permissions:"
+  echo "  chmod +x bin/stop bin/start"
+  exit 1
+fi
+
+# Display restart message
+echo "Restarting services..."
+
+# Stop services
+bin/stop "$@"
+
+# Start services
+bin/start "$@"
+
+echo "Services restarted successfully."
