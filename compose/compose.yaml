@@ -24,6 +24,7 @@ services:
       - sock-data:/sock
       - ssl-data:/etc/nginx/certs
       - nginx-logs:/var/log/nginx
+      - php-fpm-logs:/var/log/php-fpm
     extra_hosts: &extra-hosts
       - "*:172.17.0.1"
 
@@ -58,10 +59,11 @@ services:
     ports:
       - ${MYSQL_DB_PORT:-3306}:3306
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-dev_db}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -77,10 +79,12 @@ services:
     ports:
       - ${POSTGRES_DB_PORT:-5432}:5432
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data:cached
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-root}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_DB: ${POSTGRES_DB:-dev_db}
+    command: postgres -c log_statement=all
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
@@ -89,6 +93,7 @@ services:
 
 volumes:
   nginx-logs:
+  php-fpm-logs:
   nginx-data:
   sock-data:
   ssl-data:
