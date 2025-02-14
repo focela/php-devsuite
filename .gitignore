@@ -70,7 +70,7 @@ fabric.properties
 .LSOverride
 
 # Cache and metadata files
-Icon  # Must end with two \r
+Icon
 ._*
 .com.apple.timemachine.donotpresent
 .DocumentRevisions-V100
@@ -89,3 +89,8 @@ Temporary Items
 
 # SSL-related directories
 .well-known
+
+# Directories docker
+compose/.env
+compose/docker/nginx/sites-enabled/*.conf
+compose/src
