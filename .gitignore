@@ -1,96 +1,82 @@
-### IntelliJ & JetBrains IDEs ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm, and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
-# User-specific settings
-.idea/**/dictionaries
-.idea/**/shelf
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/workspace.xml
-.idea/**/aws.xml
-
-# Generated & frequently changing files
-.idea/**/contentModel.xml
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/dataSources.xml
-.idea/**/dataSources/
-.idea/**/dbnavigator.xml
-.idea/**/dynamic.xml
-.idea/**/sqlDataSources.xml
-.idea/**/uiDesigner.xml
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# Build-related files
-cmake-build-*/
+# IDE-SPECIFIC FILES
+# JetBrains IDEs (IntelliJ, WebStorm, etc.)
+.idea/
 .idea_modules/
-
-# Plugins-related files
-.idea/**/mongoSettings.xml
-.idea/**/sonarlint/
-.idea/**/sonarIssues.xml
+.idea/$CACHE_FILE$
+.idea/**/aws.xml
 .idea/**/azureSettings.xml
 .idea/**/codestream.xml
-.idea/**/markdown-navigator-enh.xml
-.idea/**/markdown-navigator.xml
-.idea/**/markdown-navigator/
+.idea/**/contentModel.xml
+.idea/**/dbnavigator.xml
+.idea/**/dictionaries
+.idea/**/dynamic.xml
+.idea/**/gradle.xml
 .idea/**/httpRequests
+.idea/**/libraries
+.idea/**/markdown-navigator/
+.idea/**/mongoSettings.xml
+.idea/**/shelf
+.idea/**/sonarIssues.xml
+.idea/**/sonarlint/
+.idea/**/sqlDataSources.xml
+.idea/**/tasks.xml
+.idea/**/uiDesigner.xml
+.idea/**/usage.statistics.xml
+.idea/**/workspace.xml
 .idea/caches/build_file_checksums.ser
+.idea/misc.xml
+.idea/replstate.xml
+modules.xml
 
 # IntelliJ project files
 *.iml
 *.ipr
-.idea/misc.xml
-modules.xml
 
-# JIRA plugin
+# EXTERNAL PLUGINS / THIRD-PARTY FILES
+# Atlassian, Crashlytics, Fabric, etc.
 atlassian-ide-plugin.xml
-
-# Android & Crashlytics plugin files
 com_crashlytics_export_strings.xml
 crashlytics-build.properties
 crashlytics.properties
 fabric.properties
 
-# Cursive Clojure plugin
-.idea/replstate.xml
-
-# IntelliJ Patch
-.idea/$CACHE_FILE$
-
-### macOS System Files ###
-# Reference: https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
-
-# General macOS system files
-.AppleDouble
+# OS-SPECIFIC FILES
+# macOS system files
 .DS_Store
-.idea
-.LSOverride
-
-# Cache and metadata files
-Icon
+.apdisk
 ._*
+.AppleDB
+.AppleDesktop
+.AppleDouble
 .com.apple.timemachine.donotpresent
 .DocumentRevisions-V100
 .fseventsd
+.LSOverride
 .Spotlight-V100
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
-
-# Remote AFP share directories
-.apdisk
-.AppleDB
-.AppleDesktop
+Icon
 Network Trash Folder
 Temporary Items
 
-# SSL-related directories
-.well-known
+# PROJECT CONFIG / SECRETS
+# SSL and security-related
+.well-known/
 
-# Directories docker
+# Local environment configuration
+.env
+
+# LOGS / TEMP FILES
+# Log and temp files
+*.log
+*.tmp
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# DOCKER / KUBERNETES
+.dockerignore
+.kube/
 compose/.env
-compose/docker/nginx/sites-enabled/*.conf
-compose/src
